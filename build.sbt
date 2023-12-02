@@ -15,16 +15,13 @@ lazy val leaderboardFrontendApp = project
   .settings(
     name                            := "leaderboard-frontend",
     scalaVersion                    := "3.3.1",
-    scalacOptions                  ++= Seq("-encoding", "utf-8", "-deprecation", "-feature"),
     scalaJSUseMainModuleInitializer := true,
     scalaJSLinkerConfig ~= {
       _.withModuleKind(ModuleKind.ESModule)
         .withModuleSplitStyle(ModuleSplitStyle.SmallModulesFor(List("de.flwi.spacetraders.leaderboard")))
     },
-    externalNpm := {
-      Process("npm install", baseDirectory.value).!
-      baseDirectory.value
-    },
+    externalNpm := baseDirectory.value,
+
     libraryDependencies ++= Seq(
       "com.raquo" %%% "laminar" % "15.0.1"
     ),
